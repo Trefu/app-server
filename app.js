@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+//sirve carpeta estatica publica
 app.use(express.static(__dirname + "/public"));
-
+//sirve en el root el indexhtml principal
 app.get("/", (req, res) => {
     res.sendFile(__dirname + '/public/index.html')
 });
