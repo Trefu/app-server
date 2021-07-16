@@ -1,9 +1,18 @@
+require('dotenv').config()
+
 const express = require("express");
 const path = require('path');
-const morgan = require('morgan');
 const engine = require('ejs-mate');
+const passport = require('passport')
+const session = require('express-session')
+const morgan = require('morgan');
+const flash = require('connect-flash')
 
+//init
 const app = express();
+require('./database');
+require('./passport/local-auth');
+
 
 //Configuraciones
 const PORT = process.env.PORT || 3000;
@@ -13,11 +22,18 @@ app.set('view engine', 'ejs');
 
 //MIDDLEWARES
 app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
 
 //RUTAS
-app.use('/', require('./routes/index'))
+app.use('/', require('./routes/index'));
 
 //Arrancando server
 app.listen(PORT, () => {
