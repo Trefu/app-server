@@ -12,6 +12,7 @@ app.set('view engine', 'ejs');
 
 //MIDDLEWARES
 app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: false }))
 
 //RUTAS
 app.use('/', require('./routes/index'))

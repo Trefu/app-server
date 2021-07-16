@@ -6,10 +6,10 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/signup', (req, res, next) => {
-    res.send("REGISTRO WEB")
+    res.render("signup")
 })
 router.post('/signup', (req, res, next) => {
-    res.send("REGISTRO POST")
+
 })
 
 router.get('/login', (req, res, next) => {
