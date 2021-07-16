@@ -9,7 +9,8 @@ router.get('/signup', (req, res, next) => {
     res.render("signup")
 })
 router.post('/signup', (req, res, next) => {
-
+    console.log(req.body);
+    res.send("recibeido");
 })
 
 router.get('/login', (req, res, next) => {

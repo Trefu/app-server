@@ -2,6 +2,7 @@ const express = require("express");
 const path = require('path');
 const morgan = require('morgan');
 const engine = require('ejs-mate');
+
 const app = express();
 
 //Configuraciones
@@ -12,7 +13,8 @@ app.set('view engine', 'ejs');
 
 //MIDDLEWARES
 app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 //RUTAS
 app.use('/', require('./routes/index'))
