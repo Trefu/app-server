@@ -4,15 +4,17 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
     email: String,
-    password: String
+    password: String,
+    validated: { type: Boolean, default: false }
 });
 
 UserSchema.methods.encryptPassword = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
 
-}
+};
+
 UserSchema.methods.comparePassword = function (password) {
     return bcrypt.compareSync(password, this.password);
-}
+};
 
-module.exports = mongoose.model('users', UserSchema)
+module.exports = mongoose.model('users', UserSchema);

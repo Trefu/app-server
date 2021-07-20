@@ -6,7 +6,7 @@ const engine = require('ejs-mate');
 const passport = require('passport')
 const session = require('express-session')
 const morgan = require('morgan');
-const flash = require('connect-flash')
+
 
 //init
 const app = express();
@@ -28,9 +28,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
-app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
+
 
 //RUTAS
 app.use('/', require('./routes/index'));

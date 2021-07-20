@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>app</title>
+</head>
+
+<body>
+    <nav
+        class="font-sans flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-4 px-6 bg-white shadow sm:items-baseline w-full">
+        <div class="mb-2 sm:mb-0">
+            <a href="/" class="text-2xl no-underline text-grey-darkest hover:text-blue-dark">Home</a>
+        </div>
+        <div>
+            <a href="/login" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">Login</a>
+            <a href="/signup" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">Sign up</a>
+            <a href="/profile" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">Profile</a>
+            <a href="/logout" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">Logout</a>
+        </div>
+    </nav>
+    </header>
+
+    <%- body %>
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</body>
+
+</html>
