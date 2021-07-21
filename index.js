@@ -7,12 +7,10 @@ const passport = require('passport')
 const session = require('express-session')
 const morgan = require('morgan');
 
-
 //init
 const app = express();
 require('./database');
 require('./passport/local-auth');
-
 
 //Configuraciones
 const PORT = process.env.PORT || 3000;
@@ -31,9 +29,9 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-
 //RUTAS
 app.use('/', require('./routes/index'));
+
 
 //Arrancando server
 app.listen(PORT, () => {
