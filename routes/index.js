@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { ensureAuth, ensureGuest } = require('../middleware/authjs')
 const passport = require('passport');
-
 
 router.get('/', (req, res, next) => {
     res.render("index")
@@ -11,13 +11,13 @@ router.get('/signup', (req, res, next) => {
     res.render("signup")
 })
 
-router.get('/login', isLoged, (req, res, next) => {
+router.get('/login', ensureGuest, (req, res, next) => {
     res.render("login")
 });
 
 
 //LOGIN
-router.post('/login', async (req, res, next) => {
+router.post('/auth/login', async (req, res, next) => {
     passport.authenticate('local-signin', {
         passReqToCallback: true
     },
@@ -32,6 +32,9 @@ router.post('/login', async (req, res, next) => {
         })(req, res, next)
 });
 
+
+
+
 //SIGN UP
 router.post('/signup', async (req, res, next) => {
     passport.authenticate('local-signup',
@@ -43,31 +46,14 @@ router.post('/signup', async (req, res, next) => {
         })(req, res, next)
 })
 
-router.get('/profile', isAuthenticated, (req, res, next) => {
-    res.render('profile');
+router.get('/profile', ensureAuth, (req, res, next) => {
+    res.render('profile', { userinfo: req.user });
 })
 
 router.get('/logout', (req, res, next) => {
     req.logOut();
     res.redirect('/');
 })
-//Si no esta logeado, redirreciona a login
-function isAuthenticated(req, res, next) {
-    console.log(req.isAuthenticated())
-    if (!req.isAuthenticated()) {
-        res.redirect('/login');
-        return
-    }
-    return next()
-}
 
-//si esta logeado,redirect a profile
-function isLoged(req, res, next) {
-    if (req.isAuthenticated()) {
-        res.redirect('/profile');
-        return
-    }
-    return next()
-}
 
 module.exports = router
